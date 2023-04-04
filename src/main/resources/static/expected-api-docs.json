@@ -1,0 +1,104 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/transactions/{id}": {
+      "get": {
+        "tags": [
+          "hello-world-controller"
+        ],
+        "operationId": "getTransaction",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Account": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Account's id",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "Account's name"
+          }
+        },
+        "description": "Transaction account"
+      },
+      "Transaction": {
+        "required": [
+          "fromAccount",
+          "subject",
+          "toAccount",
+          "totalAmount",
+          "tradeNO"
+        ],
+        "type": "object",
+        "properties": {
+          "tradeNO": {
+            "type": "integer",
+            "description": "trade number",
+            "format": "int64"
+          },
+          "totalAmount": {
+            "type": "integer",
+            "description": "total amount",
+            "format": "int64"
+          },
+          "subject": {
+            "type": "string",
+            "description": "subject"
+          },
+          "fromAccount": {
+            "$ref": "#/components/schemas/Account",
+            "description": "transaction initiator, payer"
+          },
+          "toAccount": {
+            "$ref": "#/components/schemas/Account",
+            "description": "transaction receiver, payee"
+          }
+        },
+        "description": "Account"
+      }
+    }
+  }
+}
