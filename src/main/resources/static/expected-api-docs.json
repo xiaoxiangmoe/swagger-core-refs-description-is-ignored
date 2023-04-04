@@ -1,0 +1,102 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/transactions/{id}": {
+      "get": {
+        "tags": [
+          "hello-world-controller"
+        ],
+        "operationId": "getTransaction",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Account": {
+        "description": "Transaction account",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Account's id"
+          },
+          "name": {
+            "type": "string",
+            "description": "Account's name"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "Transaction": {
+        "description": "Transaction",
+        "properties": {
+          "tradeNO": {
+            "type": "integer",
+            "format": "int64",
+            "description": "trade number"
+          },
+          "totalAmount": {
+            "type": "integer",
+            "format": "int64",
+            "description": "total transaction amount"
+          },
+          "subject": {
+            "type": "string",
+            "description": "transaction subject"
+          },
+          "fromAccount": {
+            "$ref": "#/components/schemas/Account",
+            "description": "transaction initiator, payer"
+          },
+          "toAccount": {
+            "$ref": "#/components/schemas/Account",
+            "description": "transaction receiver, payee"
+          }
+        },
+        "required": [
+          "fromAccount",
+          "subject",
+          "toAccount",
+          "totalAmount",
+          "tradeNO"
+        ]
+      }
+    }
+  }
+}
