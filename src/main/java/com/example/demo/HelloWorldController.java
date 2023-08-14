@@ -25,7 +25,7 @@ public class HelloWorldController {
         public long tradeNO;
         @Schema(description = "total transaction amount", requiredMode = REQUIRED)
         public long totalAmount;
-        @Schema(description = "transaction subject", requiredMode = REQUIRED)
+        @Schema(description = "transaction subject", requiredMode = REQUIRED, example = "Hello", examples = { "Hello", "World" })
         public String subject;
 
         @Schema(description = "transaction initiator, payer", requiredMode = REQUIRED)
